@@ -1,18 +1,15 @@
-dist: trusty
+  dist: trusty
 
-group: edge
+  group: edge
 
-language: java
+  language: java
 
-sudo: required
+  sudo: required
 
-jdk: openjdk8
+  jdk: openjdk8
 
-cache:
-  directories:
-    - $HOME/.m2
+  cache:
+    directories:
+      - $HOME/.m2
   script:
     - mvn clean install
-  after_success:
-    - mvn clean test coveralls:report
-
