@@ -26,13 +26,35 @@ public class Listino implements TakeAwayBill {
         if (itemsOrdered.isEmpty()) {
             throw new TakeAwayBillException("Lista ordini vuota");
         }
+        
         //salviamo sempre il totale nel listino
         double somma = 0;
+        int gelati = 0;
+        
+        double min = 1000;
+        
+        //contiamo i gelati e prendiamo il min
+        for (MenuItem menuItem : itemsOrdered) {
+            if (menuItem.getType().equals(MenuItem.items.gelato)) {
+                gelati++;
+                if (menuItem.getPrice() < min) {
+                    min = menuItem.getPrice();
+                }
+            }
+        }
+        
         //abbiamo la lista, ora la scorriamo iterativamente per somma
         for (MenuItem menuItem : itemsOrdered) { 
             somma += menuItem.getPrice();
         }
+        //Se ci sono piu' di 5 gelati si toglie min/2
+        if(gelati >= 5) {
+            somma -= min/2;
+        }
+        
         
         return somma;
     }
+
+    
 }
