@@ -14,6 +14,7 @@ public class Listino implements TakeAwayBill {
     
 
     public double getOrderPrice(List<MenuItem> itemsOrdered, User User) throws TakeAwayBillException {
+        /*
         //Se la lista null exception
         if (itemsOrdered == null) {
             throw new TakeAwayBillException("Lista non valida");
@@ -26,7 +27,7 @@ public class Listino implements TakeAwayBill {
         if (itemsOrdered.isEmpty()) {
             throw new TakeAwayBillException("Lista ordini vuota");
         }
-        
+        */
         //salviamo sempre il totale nel listino
         double somma = 0;
         int gelati = 0;
