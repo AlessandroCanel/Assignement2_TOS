@@ -2,7 +2,7 @@
 // [ALESSANDRO] [CANEL] [1204681]
 ////////////////////////////////////////////////////////////////////
 
-package it.unipd.tos;
+package it.unipd.tos.model;
 
 public class User {
     String name;
@@ -11,15 +11,21 @@ public class User {
     // dati cognome
     int age;
     // dati età
-    String id;
-    // codice fiscale alfanumerico
 
-    // classe per mettere tutto assieme
-    public User(String n, String s, int a, String i) {
-        this.name = n;
-        this.sname = s;
-        this.age = a;
-        this.id = i;
+    // classe pubblica per mettere tutto assieme
+    public User(String name, String sname, int age) {
+        if(name.isEmpty()) {
+            throw new IllegalArgumentException("Nome vuoto");
+        }
+        if(sname.isEmpty()) {
+            throw new IllegalArgumentException("Cognome vuoto");
+        }
+        if (age <= 0) {
+            throw new IllegalArgumentException("Età non corretta");
+        }
+        this.name = name;
+        this.sname = sname;
+        this.age = age;
     }
 
     // e ora tutti i get per i controlli
@@ -27,7 +33,7 @@ public class User {
         return name;
     }
 
-    public String getSurname() {
+    public String getSname() {
         return sname;
     }
 
@@ -37,9 +43,5 @@ public class User {
 
     public boolean getChild() {
         return age < 18;
-    }
-
-    public String getId() {
-        return id;
     }
 }
