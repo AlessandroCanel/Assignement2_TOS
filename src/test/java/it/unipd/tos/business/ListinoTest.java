@@ -46,5 +46,42 @@ public class ListinoTest {
     public void testSomma() throws TakeAwayBillException {
         assertEquals(25.50, listino.getOrderPrice(ordinazioni, user), 0.00);
     }
+    //Sconto solo sul 50%
+    @Test
+    public void testSconto50() throws TakeAwayBillException {
+        ordinazioni.clear();
+        ordinazioni.add(new MenuItem("Coppa1", items.gelato, 3));
+        ordinazioni.add(new MenuItem("Coppa2", items.gelato, 3));
+        ordinazioni.add(new MenuItem("Coppa3", items.gelato, 3));
+        ordinazioni.add(new MenuItem("Coppa4", items.gelato, 3));
+        ordinazioni.add(new MenuItem("Coppa5", items.gelato, 2));
+
+        assertEquals(13, listino.getOrderPrice(ordinazioni, user), 0.00);
+    }  
+    
+    //Sconto solo sul 10%
+    @Test
+    public void testSconto10() throws TakeAwayBillException {
+        ordinazioni.clear();
+        ordinazioni.add(new MenuItem("ElisirOro", items.gelato, 30));
+        ordinazioni.add(new MenuItem("ElisirDiamante", items.gelato, 30));
+
+        assertEquals(54, listino.getOrderPrice(ordinazioni, user), 0.00);
+    }  
+    
+    //Sconto solo su entrambi%
+    @Test
+    public void testScontoEntrambi() throws TakeAwayBillException {
+        ordinazioni.clear();
+        ordinazioni.add(new MenuItem("ElisirOro", items.gelato, 30));
+        ordinazioni.add(new MenuItem("ElisirDiamante", items.gelato, 30));
+        ordinazioni.add(new MenuItem("Coppa1", items.gelato, 10));
+        ordinazioni.add(new MenuItem("Coppa2", items.gelato, 10));
+        ordinazioni.add(new MenuItem("Coppa5", items.gelato, 10));
+
+        assertEquals(76.5, listino.getOrderPrice(ordinazioni, user), 0.00);
+    }  
+    
+
 
 }
