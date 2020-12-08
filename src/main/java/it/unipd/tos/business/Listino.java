@@ -66,6 +66,10 @@ public class Listino implements TakeAwayBill {
             somma = somma * 0.9;
         }
         
+        if(somma < 10){
+            somma += 0.5;
+        }
+        
         return somma;
     }
 

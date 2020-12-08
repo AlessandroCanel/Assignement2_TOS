@@ -82,7 +82,7 @@ public class ListinoTest {
         assertEquals(76.5, listino.getOrderPrice(ordinazioni, user), 0.00);
     }  
     
-
+    //test per +30
     @Test(expected=TakeAwayBillException.class)
     public void testTroppiElementi() throws TakeAwayBillException {
         for(int i=0; i<50; i++) {
@@ -91,5 +91,12 @@ public class ListinoTest {
         
         listino.getOrderPrice(ordinazioni, user);
      }
-
+    //test per <10€
+    @Test
+    public void testCommissione() throws TakeAwayBillException {
+        ordinazioni.clear();
+        ordinazioni.add(new MenuItem("Coppa1", items.gelato, 3));
+        ordinazioni.add(new MenuItem("Coppa2", items.gelato, 3));
+        assertEquals(6.5, listino.getOrderPrice(ordinazioni, user), 0.00);
+    }
 }
