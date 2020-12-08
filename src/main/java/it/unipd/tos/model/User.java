@@ -14,6 +14,7 @@ public class User {
 
     // classe pubblica per mettere tutto assieme
     public User(String name, String sname, int age) {
+        /*
         if(name.isEmpty()) {
             throw new IllegalArgumentException("Nome vuoto");
         }
@@ -22,7 +23,7 @@ public class User {
         }
         if (age <= 0) {
             throw new IllegalArgumentException("Età non corretta");
-        }
+        */
         this.name = name;
         this.sname = sname;
         this.age = age;
