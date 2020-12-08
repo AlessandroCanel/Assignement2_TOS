@@ -28,6 +28,11 @@ public class Listino implements TakeAwayBill {
             throw new TakeAwayBillException("Lista ordini vuota");
         }
         */
+        if(itemsOrdered.size() >= 30) {
+            
+            throw new TakeAwayBillException("Troppi ordini");
+        }
+        
         //salviamo sempre il totale nel listino
         double somma = 0;
         int gelati = 0;

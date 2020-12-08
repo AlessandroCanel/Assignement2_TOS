@@ -11,8 +11,4 @@ public class TakeAwayBillException extends Exception{
         this.err = a;
     }
     
-    //ora per il test
-    public String getMessage() {
-        return err;
-    }
 }

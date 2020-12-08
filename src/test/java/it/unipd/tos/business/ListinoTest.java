@@ -83,5 +83,13 @@ public class ListinoTest {
     }  
     
 
+    @Test(expected=TakeAwayBillException.class)
+    public void testTroppiElementi() throws TakeAwayBillException {
+        for(int i=0; i<50; i++) {
+            ordinazioni.add(new MenuItem("ElisirOro", items.gelato, 30));
+        }
+        
+        listino.getOrderPrice(ordinazioni, user);
+     }
 
 }
