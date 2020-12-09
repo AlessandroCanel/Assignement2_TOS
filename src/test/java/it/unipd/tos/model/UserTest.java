@@ -38,7 +38,7 @@ public class UserTest {
     {
              assertEquals("Bello", persona.getSname());
     }
-/*
+
     //e ora quelli che mi aspetto falliranno
     //non ha età
     @Test ( expected = IllegalArgumentException.class )
@@ -54,5 +54,5 @@ public class UserTest {
     public void testUserNameEmpty() {
         new User("", "Bello", 18);
     }
-*/
+
 }

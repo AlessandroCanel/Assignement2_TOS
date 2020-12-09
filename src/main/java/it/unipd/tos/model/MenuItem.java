@@ -20,6 +20,7 @@ public class MenuItem {
 
     // classe per mettere i dati assieme
     public MenuItem(String name, items itemType, double price) {
+        
         if (name.contains(" ")) {
             throw new IllegalArgumentException("Nome non valido");
         }
@@ -27,12 +28,12 @@ public class MenuItem {
             throw new IllegalArgumentException("Prezzo non valido");
         }   
         if (itemType == null) {
-            throw new IllegalArgumentException("itemType non valido");
+            throw new IllegalArgumentException("Tipo non valido");
         }  
         if (name.isEmpty()) {
             throw new IllegalArgumentException("Nome vuoto");
         }
-          
+        
         this.itemType = itemType;
         this.name = name;
         this.price = price;
