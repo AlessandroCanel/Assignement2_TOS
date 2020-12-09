@@ -4,31 +4,22 @@
 
 package it.unipd.tos.business;
 
+import java.time.LocalTime;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import it.unipd.tos.business.exception.TakeAwayBillException;
+import it.unipd.tos.model.Gift;
 import it.unipd.tos.model.MenuItem;
 import it.unipd.tos.model.User;
 
-public class Listino implements TakeAwayBill {
-    
 
-    public double getOrderPrice(List<MenuItem> itemsOrdered, User User) throws TakeAwayBillException {
-        /*
-        //Se la lista null exception
-        if (itemsOrdered == null) {
-            throw new TakeAwayBillException("Lista non valida");
-        }
-        //user come null
-        if (User == null) {
-            throw new TakeAwayBillException("User non valido");
-        }
-        //se listino vuoto diventa inutile quindi Exception
-        if (itemsOrdered.isEmpty()) {
-            throw new TakeAwayBillException("Lista ordini vuota");
-        }
-        */
-        if(itemsOrdered.size() >= 30) {
+public class Listino implements TakeAwayBill {
+
+    public double getOrderPrice(List<MenuItem> items, User User) throws TakeAwayBillException {
+
+        if(items.size() >= 30) {
             
             throw new TakeAwayBillException("Troppi ordini");
         }
@@ -40,7 +31,7 @@ public class Listino implements TakeAwayBill {
         double min = 1000;
         
         //contiamo i gelati e prendiamo il min
-        for (MenuItem menuItem : itemsOrdered) {
+        for (MenuItem menuItem : items) {
             if (menuItem.getType().equals(MenuItem.items.gelato)) {
                 gelati++;
                 totGelatiBudini += menuItem.getPrice();
@@ -54,7 +45,7 @@ public class Listino implements TakeAwayBill {
         }
         
         //abbiamo la lista, ora la scorriamo iterativamente per somma
-        for (MenuItem menuItem : itemsOrdered) { 
+        for (MenuItem menuItem : items) { 
             somma += menuItem.getPrice();
         }
         //Se ci sono piu' di 5 gelati si toglie min/2
@@ -65,7 +56,7 @@ public class Listino implements TakeAwayBill {
         if(totGelatiBudini > 50) {
             somma = somma * 0.9;
         }
-        
+        //commissione aggiuntiva da 0.50€ se ordine < 10€ 
         if(somma < 10){
             somma += 0.5;
         }
@@ -73,5 +64,46 @@ public class Listino implements TakeAwayBill {
         return somma;
     }
 
+    
+    //implementiamo ora i regali
+    public int Regali(List <Gift> regali) {
+        //lista di quelli che sono stati scelti
+        ArrayList<Gift> scelti = new ArrayList<Gift>();
+        Boolean trovato = true;
+        for (Gift list : regali) {
+            //minori di 18
+            if(list.getUser().getAge() <= 18) {
+                //fatti tra le 18 e 19
+                if (list.getTime().isBefore(LocalTime.of(19, 00)) && list.getTime().isAfter(LocalTime.of(18, 00))) {
+                    for (Gift prescelto : scelti) {
+                        if (prescelto.getUser().equals(list.getUser())) {
+                            trovato = false;
+                        }
+                    } 
+                    if (trovato) {
+                        scelti.add(list);
+                    }
+                }
+            }
+        }
+        
+        //regalo
+        int numeroRegali = 0;
+        if (scelti.size() > 9) {
+            
+            Random rand = new Random();
+
+            for (int i = 0; i < 10; i++) {
+                numeroRegali += 1;
+                //viene estratto un numero dalla size di scelti
+                int numero = rand.nextInt(scelti.size());
+                Gift vincitore = scelti.get(numero);
+                //ora dobbiamo ricordare chi vince
+                vincitore.setGiveAway(true);
+                scelti.remove(vincitore);
+            }
+        }     
+        return numeroRegali;
+    }
     
 }

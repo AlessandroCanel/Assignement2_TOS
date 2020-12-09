@@ -38,7 +38,7 @@ public class MenuItemTest {
     }
 	
     
- /*   
+  
     //e ora i test che prevedo falliranno
 
     //Nessun nome dato
@@ -61,5 +61,5 @@ public class MenuItemTest {
     public void getNoitemTest() {
         new MenuItem ("Tuttifrutti", null , 7.00);
     }
-*/
+
 }
